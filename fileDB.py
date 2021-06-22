@@ -4,11 +4,13 @@ class FileDataReader:
         self.country = {}
         self.bets = {}
         # read match lis and results
-        self.read_match_list('file_src/match_WM2018.csv', 'WM18')
         self.read_match_list('file_src/match_EURO16.csv', 'ME16')
+        self.read_match_list('file_src/match_WM2018.csv', 'WM18')
+        self.read_match_list('file_src/match_EURO20.csv', 'ME20')
         self.read_cntr()
         self.read_bets('file_src/betsEUR2016.csv', 'ME16')
         self.read_bets('file_src/betsMS2018.csv', 'WM18')
+        self.read_bets('file_src/betsEUR2020.csv', 'ME20')
 
     def read_match_list(self, filename, tourID):
         match_file = open(filename, encoding="utf8")
@@ -47,7 +49,6 @@ class FileDataReader:
                 lcl_player.append(int(splitted[1][bonus_start:bonus_end]))
             else:
                 lcl_player.append(0)
-
             for res in splitted[2:]:
                 result = []
                 if res[0] == "-":

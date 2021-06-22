@@ -28,8 +28,12 @@ class Controler:
                 player_set.add(player)
 
         for player in player_set:
+            sum = 0
             tour = { }
             for id, obj in self.tour_list:
                 tour[id] = obj.get_tour_points_with_bonus(player)
-            result.append([player,tour])
-        return  result
+                sum += tour[id]
+            result.append([player,tour, sum])
+        return sorted(result, key=lambda l:l[2], reverse=True)
+
+

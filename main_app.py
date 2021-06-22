@@ -15,5 +15,6 @@ def show_hof():
     player_list = controler.get_player_list()
     return render_template('tournament_list.html', tour_list=tour_list, player=player_list)
 
+
 if __name__ == "__main__":
   app.run()
