@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+{% block script %}
+<script type="text/javascript" src="/static/js/Chart.min.js"></script>
 
+{% endblock %}
 {% block body %}
     <tbody>
     LIST OF TOURNAMENTS
@@ -36,8 +39,8 @@
             {% for row in tour_list %}
             <th>{{ row[0] }}</th>
             {% endfor %}
-            <th>% with points</th>
-            <th>% with correct result</th>
+            <th>Total Points</th>
+            <th>Total Vanilla Points</th>
             <th>% jokers</th>
             <th>Bonus points</th>
             <th>Total Points</th>
@@ -49,8 +52,65 @@
             <td>{{ pl[1][tour[0]] }}</td>
           {% endfor %}
             <td>{{ pl[2] }}</td>
+            <td>{{ pl[3] }}</td>
         </tr>
     {% endfor %}
     </table>
+
+            <canvas id="allTourChart" width="1000" height="500"></canvas>
+    <script type="text/javascript">
+         function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        var ctx = document.getElementById('allTourChart').getContext('2d');;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+
+                labels: [
+                {% for match in match_list %}
+                    "{{match}}",
+                {% endfor %}
+                ],
+
+                datasets: [
+                {% for item in all_chart_data %}
+                    {
+                    label: "{{item['player']}}",
+                    hidden: true,
+                    fill: false,
+                    lineTension: 0.1,
+                    borderColor: getRandomColor(),
+                    data: {{item['value']}}
+                    },
+                 {% endfor %}
+                ]
+            }
+
+        });
+
+          $(document).ready(function() {
+            var table = $('#example').DataTable({
+                "paging": false,
+                "info": false,
+            });
+
+            $('#example tbody').on( 'click', 'tr', function () {
+                $(this).toggleClass('selected');
+                buyerData['datasets'][0]['hidden'] = false
+                myNewChart.update()
+            } );
+
+            $('#button').click( function () {
+                alert( table.rows('.selected').data().length +' row(s) selected' );
+            } );
+        } );
+    </script>
+
     </tbody>
 {% endblock %}

@@ -25,7 +25,7 @@ class Tournament:
             else:
                 dict[check] = 1
         return {k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}
-    def get_all(self):
+    def get_all_bets(self):
         return self.bets
     def get_player_no(self):
         return len(self.bets)
@@ -39,6 +39,7 @@ class Tournament:
         joker_hit = 0
         for player in self.bets.values():
             for res in player[1]:
+
                 if res[3] != 0:
                     good_winner += 1
                 if res[2] == True:
@@ -66,7 +67,33 @@ class Tournament:
         result = 0
         pl = self.bets.get(player)
         if pl:
+            # bonus
             result += pl[0]
             for res in pl[1]:
                 result += res[3]
         return result
+    def get_tour_points_no_bonus_joker(self,player):
+        result = 0
+        pl = self.bets.get(player)
+        if pl:
+            for res in pl[1]:
+                if res[2]:
+                    if res[3] != 0:
+                        result += res[3]/2
+                else:
+                    result += res[3]
+        return int(result)
+    def get_point_for_match(self,player, match_idx):
+        pl = self.bets.get(player)
+        if pl:
+                return  pl[1][match_idx][3]
+        else:
+            return 0
+    def get_match_list(self):
+        return  list(self.results.keys())
+    def get_bonus_for_player(self,player):
+        pl = self.bets.get(player)
+        if pl:
+            return pl[0]
+        else:
+            return 0

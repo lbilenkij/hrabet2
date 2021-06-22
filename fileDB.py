@@ -52,7 +52,7 @@ class FileDataReader:
             for res in splitted[2:]:
                 result = []
                 if res[0] == "-":
-                    result.append([-1, -1, False, 0])
+                    lcl_result.append([-1, -1, False, 0])
                     continue
 
                 # home score
