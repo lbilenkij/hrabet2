@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Hrabet</title>
+        {% block script %}
+        {% endblock %}
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
+    <body>
+        <div id="main_menu">
+            {% block menu %}
+            <ul>
+              <li><a href="">Home</a></li>
+              <li><a href="">Hall of Fame</a></li>
+              <li><a href="">PlayerList</a></li>
+              <li><a id = "euro20" href="">EURO 2020</a></li>
+              <li><a href="">MS 2018</a></li>
+              <li><a href="">EURO 2016</a></li>
+              <li><a href="">Countries</a></li>
+            </ul>
+            {% endblock %}
+        </div>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <tbody>
+    LIST OF TOURNAMENTS
+    <table>
+        <tr>
+            <th>Tournament</th>
+            <th>No matches</th>
+            <th>Players</th>
+            <th>Goals</th>
+            <th>Goals per match</th>
+            <th>% winner</th>
+            <th>% goals</th>
+            <th>% result</th>
+            <th>% joker with point</th>
+        </tr>
+    {% for row in tour_list %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+           <td>{{ row[2] }}</td>
+           <td>{{ row[3] }}</td>
+           <td>{{ row[4] }}</td>
+           <td>{{ row[5] }}</td>
+           <td>{{ row[6] }}</td>
+           <td>{{ row[7] }}</td>
+           <td>{{ row[8] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <table>
+        <tr>
+            <th>Player</th>
+            {% for row in tour_list %}
+            <th>{{ row[0] }}</th>
+            {% endfor %}
+            <th>% with points</th>
+            <th>% with correct result</th>
+            <th>% jokers</th>
+            <th>Bonus points</th>
+            <th>Total Points</th>
+        </tr>
+    {% for pl in player %}
+        <tr>
+          <td>{{ pl[0] }}</td>
+          {% for tour in tour_list %}
+            <td>{{ pl[1][tour[0]] }}</td>
+          {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+    </tbody>
+{% endblock %}
