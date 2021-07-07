@@ -52,13 +52,13 @@ th:hover { background-color: #ba7300 }
 table.sortable tbody {
     counter-reset: sortabletablescope;
 }
+/*
 table.sortable thead tr::before {s
     content: "";
     display: table-cell;
-    background-color: #ff9d00;
 }
 table.sortable tbody tr::before {
     content: counter(sortabletablescope);
     counter-increment: sortabletablescope;
     display: table-cell;
-}
+}*/

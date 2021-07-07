@@ -6,11 +6,11 @@ class FileDataReader:
         # read match lis and results
         self.read_match_list('file_src/match_EURO16.csv', 'ME16')
         self.read_match_list('file_src/match_WM2018.csv', 'WM18')
-        self.read_match_list('file_src/match_EURO20.csv', 'ME20')
+        # self.read_match_list('file_src/match_EURO20.csv', 'ME20')
         self.read_cntr()
         self.read_bets('file_src/betsEUR2016.csv', 'ME16')
         self.read_bets('file_src/betsMS2018.csv', 'WM18')
-        self.read_bets('file_src/betsEUR2020.csv', 'ME20')
+        # self.read_bets('file_src/betsEUR2020.csv', 'ME20')
 
     def read_match_list(self, filename, tourID):
         match_file = open(filename, encoding="utf8")
@@ -71,6 +71,7 @@ class FileDataReader:
                 #points
 
                 if joker:
+                    print(splitted[0])
                     result.append(int(res[4])*int(res[5]))
                 else:
                     result.append(int(res[4]))

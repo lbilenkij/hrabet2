@@ -10,12 +10,12 @@
         <div id="main_menu">
             {% block menu %}
             <ul>
-              <li><a href="">Home</a></li>
-              <li><a href="">Hall of Fame</a></li>
+              <li><a href="{{url_for('show_index')}}">Home</a></li>
+              <li><a href="{{url_for('show_hof')}}">Hall of Fame</a></li>
               <li><a href="">PlayerList</a></li>
-              <li><a id = "euro20" href="">EURO 2020</a></li>
-              <li><a href="">MS 2018</a></li>
-              <li><a href="">EURO 2016</a></li>
+              <li><a href="{{url_for('show_tournament', tourID='EU20')}}">EURO 2020</a></li>
+              <li><a href="{{url_for('show_tournament', tourID='WM18')}}">MS 2018</a></li>
+              <li><a href="{{url_for('show_tournament', tourID='EU16')}}">EURO 2016</a></li>
               <li><a href="">Countries</a></li>
             </ul>
             {% endblock %}

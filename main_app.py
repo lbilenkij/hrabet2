@@ -16,7 +16,9 @@ def show_hof():
     all_chart_data = controler.get_all_match_points()
     match_list = controler.get_all_match_list()
     return render_template('tournament_list.html', tour_list=tour_list, player=player_list, all_chart_data=all_chart_data, match_list=match_list )
-
+@app.route('/tour/<tourID>')
+def show_tournament(tourID):
+    return render_template('tournament.html', tourID = tourID )
 
 if __name__ == "__main__":
   app.run()
