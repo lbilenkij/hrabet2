@@ -71,7 +71,6 @@ class FileDataReader:
                 #points
 
                 if joker:
-                    print(splitted[0])
                     result.append(int(res[4])*int(res[5]))
                 else:
                     result.append(int(res[4]))

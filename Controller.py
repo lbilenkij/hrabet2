@@ -48,11 +48,11 @@ class Controler:
             res['player'] = pl[0]
             res['value'] = []
             for id, obj in self.tour_list:
-                for i in range(0, (obj.get_match_no()-1)):
+                for i in range(0, (obj.get_match_no())):
                     sum += obj.get_point_for_match(pl[0], i)
                     res['value'].append(sum)
                 sum += obj.get_bonus_for_player(pl[0])
-                res['value'][-1] = sum
+                res['value'].append(sum)
 
             result.append(res)
         return result
@@ -61,6 +61,7 @@ class Controler:
         result = []
         for id, obj in self.tour_list:
             match = obj.get_match_list()
+            match.append('BONUS'+id)
             result = result + match
         return result
 
