@@ -33,15 +33,15 @@ class Tournament:
         good_winner = 0
         good_goals = 0
         good_result = 0
-        joker = 0
-        joker_hit = 10
+        joker_points = 0
+        joker_hit = 0
         if player in self.bets:
             bet = self.bets[player]
             for res in self.bets[player][1]:
                 if res[3] != 0:
                     good_winner += 1
                 if res[2]:
-                    joker += 1
+                    joker_points += res[3]
                     if res[3] != 0:
                         joker_hit += 1
                     if res[3] == 6:
@@ -55,7 +55,7 @@ class Tournament:
                     if res[3] == 5:
                         good_result += 1
                         good_goals += 1
-        return [good_winner, good_goals, good_result]
+        return [good_winner, good_goals, good_result, joker_points, joker_hit]
 
     def get_tour_stats(self):
         # count winner
