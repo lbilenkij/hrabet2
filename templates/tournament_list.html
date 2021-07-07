@@ -41,9 +41,9 @@
             {% endfor %}
             <th>Total Points</th>
             <th>Total Vanilla Points</th>
-            <th>% jokers</th>
-            <th>Bonus points</th>
-            <th>Total Points</th>
+            <th>Winners</th>
+            <th>Goals</th>
+            <th>Results</th>
         </tr>
     {% for pl in player %}
         <tr>
@@ -53,6 +53,9 @@
           {% endfor %}
             <td>{{ pl[2] }}</td>
             <td>{{ pl[3] }}</td>
+            <td>{{ pl[4] }}</td>
+            <td>{{ pl[5] }}</td>
+            <td>{{ pl[6] }}</td>
         </tr>
     {% endfor %}
     </table>

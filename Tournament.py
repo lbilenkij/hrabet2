@@ -29,6 +29,34 @@ class Tournament:
         return self.bets
     def get_player_no(self):
         return len(self.bets)
+    def get_player_stats(self, player):
+        good_winner = 0
+        good_goals = 0
+        good_result = 0
+        joker = 0
+        joker_hit = 10
+        if player in self.bets:
+            bet = self.bets[player]
+            for res in self.bets[player][1]:
+                if res[3] != 0:
+                    good_winner += 1
+                if res[2]:
+                    joker += 1
+                    if res[3] != 0:
+                        joker_hit += 1
+                    if res[3] == 6:
+                        good_goals += 1
+                    elif res[3] == 10:
+                        good_goals += 1
+                        good_result += 1
+                else:
+                    if res[3] == 3:
+                        good_goals += 1
+                    if res[3] == 5:
+                        good_result += 1
+                        good_goals += 1
+        return [good_winner, good_goals, good_result]
+
     def get_tour_stats(self):
         # count winner
         all = self.get_player_no() * self.get_match_no()
@@ -39,7 +67,6 @@ class Tournament:
         joker_hit = 0
         for player in self.bets.values():
             for res in player[1]:
-
                 if res[3] != 0:
                     good_winner += 1
                 if res[2] == True:

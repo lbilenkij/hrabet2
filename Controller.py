@@ -31,11 +31,16 @@ class Controler:
             sum = 0
             sum_vanilla = 0
             tour = { }
+            player_stats = [0,0,0]
             for id, obj in self.tour_list:
                 tour[id] = obj.get_tour_points_with_bonus(player)
                 sum_vanilla += obj.get_tour_points_no_bonus_joker(player)
+                tmp_stats = obj.get_player_stats(player)
+                player_stats[0] += tmp_stats[0]
+                player_stats[1] += tmp_stats[1]
+                player_stats[2] += tmp_stats[2]
                 sum += tour[id]
-            result.append([player,tour, sum, sum_vanilla])
+            result.append([player,tour, sum, sum_vanilla, player_stats[0], player_stats[1], player_stats[2]])
         return sorted(result, key=lambda l:l[2], reverse=True)
 
     def get_all_match_points(self):
