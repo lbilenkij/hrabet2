@@ -56,6 +56,7 @@ class Tournament:
                         good_goals += 1
                     if res[3] == 5:
                         good_result +=1
+                        good_goals += 1
         return [round(good_winner/all*100,2), round(good_goals/all*100,2), round(good_result/all*100,2), round(joker_hit/joker*100,2)]
 
     def get_player_names(self):
