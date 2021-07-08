@@ -76,6 +76,41 @@ class Controler:
             result = result + match
         return result
 
+    def get_ranking(self, match_no, points):
+        point_rank_tab =[]
+        rank_result = []
+        for idx in range(0, match_no):
+            point_list = []
+            for line in points:
+                point_list.append(line['value'][idx])
+            point_list.sort(reverse=True)
+            point_ranking = self.rank_me(point_list)
+            point_rank_tab.append(point_ranking)
+        for line in points:
+            res = {}
+            player = line['player']
+            res['player'] = player
+            res['value'] = []
+            for idx in range(0, match_no):
+                res['value'].append(-1*point_rank_tab[idx][line['value'][idx]])
+            rank_result.append(res)
+        return rank_result
 
+    def rank_me(self, sequence):
+        rank = {}
+        curr = -1
+        idx = 0
+        for itm in sequence:
+            idx += 1
+            if curr == -1:
+                rank[itm] = idx
+                curr = itm
+                continue
+            if curr == itm:
+                continue
+            if curr > itm:
+                rank[itm] = idx
+                curr = itm
 
+        return rank
 

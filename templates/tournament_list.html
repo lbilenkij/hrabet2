@@ -67,6 +67,7 @@
     </table>
 
             <canvas id="allTourChart" width="1000" height="500"></canvas>
+            <canvas id="rankingChart" width="1000" height="500"></canvas>
     <script type="text/javascript">
          function getRandomColor() {
             var letters = '0123456789ABCDEF'.split('');
@@ -76,6 +77,54 @@
             }
             return color;
         }
+
+
+
+        var ctx2 = document.getElementById('rankingChart').getContext('2d');;
+        var myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+
+                labels: [
+                {% for match in match_list %}
+                    "{{match}}",
+                {% endfor %}
+                ],
+
+                datasets: [
+                {% for item in ranking %}
+                    {
+                    label: "{{item['player']}}",
+                    hidden: true,
+                    fill: false,
+                    lineTension: 0.1,
+                    borderColor: getRandomColor(),
+                    data: {{item['value']}}
+                    },
+                 {% endfor %}
+                ]
+            }
+
+        });
+
+          $(document).ready(function() {
+            var table = $('#example').DataTable({
+                "paging": false,
+                "info": false,
+            });
+
+            $('#example tbody').on( 'click', 'tr', function () {
+                $(this).toggleClass('selected');
+                buyerData['datasets'][0]['hidden'] = false
+                myNewChart.update()
+            } );
+
+            $('#button').click( function () {
+                alert( table.rows('.selected').data().length +' row(s) selected' );
+            } );
+        } );
+
+
         var ctx = document.getElementById('allTourChart').getContext('2d');;
         var myChart = new Chart(ctx, {
             type: 'line',
@@ -88,7 +137,7 @@
                 ],
 
                 datasets: [
-                {% for item in all_chart_data %}
+                {% for item in ranking %}
                     {
                     label: "{{item['player']}}",
                     hidden: true,
